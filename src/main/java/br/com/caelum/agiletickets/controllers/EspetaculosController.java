@@ -42,10 +42,12 @@ public class EspetaculosController {
 		// inclui a lista de estabelecimentos
 		result.include("estabelecimentos", estabelecimentos.todos());
 		return agenda.espetaculos();
-	}
+		
 
-	@Post @Path("/espetaculos")
-	public void adiciona(Espetaculo espetaculo) {
+	}
+	
+	
+	public void validaDadosEspetaculo (Espetaculo espetaculo){
 		// aqui eh onde fazemos as varias validacoes
 		// se nao tiver nome, avisa o usuario
 		// se nao tiver descricao, avisa o usuario
@@ -56,7 +58,12 @@ public class EspetaculosController {
 			validator.add(new ValidationMessage("Descricao do espetaculo nao pode estar em branco", ""));
 		}
 		validator.onErrorRedirectTo(this).lista();
+	}
 
+	@Post @Path("/espetaculos")
+	public void adiciona(Espetaculo espetaculo) {
+	
+		validaDadosEspetaculo (espetaculo);
 		agenda.cadastra(espetaculo);
 		result.redirectTo(this).lista();
 	}
