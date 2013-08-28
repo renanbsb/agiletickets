@@ -46,7 +46,7 @@ public class EspetaculosController {
 
 	}
 	
-	
+	@Post @Path("/espetaculos")
 	public void validaDadosEspetaculo (Espetaculo espetaculo){
 		// aqui eh onde fazemos as varias validacoes
 		// se nao tiver nome, avisa o usuario
@@ -60,7 +60,7 @@ public class EspetaculosController {
 		validator.onErrorRedirectTo(this).lista();
 	}
 
-	@Post @Path("/espetaculos")
+	
 	public void adiciona(Espetaculo espetaculo) {
 	
 		validaDadosEspetaculo (espetaculo);
